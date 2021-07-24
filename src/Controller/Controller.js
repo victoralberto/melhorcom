@@ -138,7 +138,7 @@ exports.findOneCelular = (req, res) => {
         }
         res.json(json);
     }).catch(err => {
-        res.json({message: "Dados do celular não encontrados."})
+        res.status(404).json({message: "Dados do celular não encontrados."})
     });
 
 }
@@ -213,11 +213,11 @@ exports.updateCelular = (req, res) => {
                                     res.json({message: "Dados inválidos. Código do produto já existe."})
                                 }
                             }).catch(err => {
-                                res.send(err.message)
+                                res.status(404).send(err.message)
                             });
 
                         }).catch(err => {
-                            res.json(err.message || {message: "Some error ocurred while creating the Celular."});
+                            res.json(err.message || {message: "Algum erro ocrreu ao tentar atualizar o celular."});
                         });
 
                     } else {
@@ -254,7 +254,7 @@ exports.deleteCelular = (req, res) => {
                 res.send({message: "Não foi possível deletar o celular. Celular não encontrado."})
             }
         }).catch(err => {
-            res.status(500).json({
+            res.status(404).json({
                 message: "Não foi possível deleter o celular com id=" + id
             })
         })
